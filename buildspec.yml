@@ -18,11 +18,11 @@ phases:
       - docker tag $REPOSITORY_NAME:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPOSITORY_NAME:latest
     
   post_build:
-  commands:
-    - docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPOSITORY_NAME:latest
+    commands:
+      - docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPOSITORY_NAME:latest
 
-    - aws ecs update-service \
-        --cluster fast-api-cluster \
-        --service fast-api-service \
-        --force-new-deployment \
-        --region eu-north-1
+      - aws ecs update-service \
+          --cluster fast-api-cluster \
+          --service fast-api-service \
+          --force-new-deployment \
+          --region eu-north-1
