@@ -20,4 +20,4 @@ phases:
   post_build:
     commands:
       - docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPOSITORY_NAME:latest
-      - aws ecs update-service --cluster fastapi-cluster --service fastapi-service --force-new-deployment --region eu-north-1
+      - aws ecs update-service --cluster fastapi-cluster --service fast-api-service-task-service-fpu7vtwa --force-new-deployment --region eu-north-1
