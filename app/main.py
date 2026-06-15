@@ -16,9 +16,13 @@ async def serve_ui():
     return FileResponse(index_path)
 
 
-@app.get("/api/health")
+@app.get("/home")
 async def health():
     return JSONResponse({"status": "ok"})
+
+@app.get("/health")
+async def health():
+    return {"status": "healthy"}
 
 
 if __name__ == "__main__":
