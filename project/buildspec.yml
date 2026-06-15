@@ -1,0 +1,13 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - pip install --no-cache-dir -r requirements.txt
+  build:
+    commands:
+      - echo "Build completed"
+artifacts:
+  files:
+    - '**/*'
