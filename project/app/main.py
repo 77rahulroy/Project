@@ -8,7 +8,7 @@ async def read_root():
     return {"message": "Application is running!"}
 
 
-@app.get("/health")
+@app.get("/home")
 async def health():
     return {"status": "ok"}
 
