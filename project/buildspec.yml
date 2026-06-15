@@ -1,13 +1,22 @@
 version: 0.2
+
+env:
+  variables:
+    REGION: eu-north-1
+    REPOSITORY_NAME: fastapi-server
+
 phases:
-  install:
-    runtime-versions:
-      python: 3.11
+  pre_build:
     commands:
-      - pip install --no-cache-dir -r requirements.txt
+      - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+
+      - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+
   build:
     commands:
-      - echo "Build completed"
-artifacts:
-  files:
-    - '**/*'
+      - docker build -t $REPOSITORY_NAME .
+      - docker tag $REPOSITORY_NAME:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPOSITORY_NAME:latest
+
+  post_build:
+    commands:
+      - docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPOSITORY_NAME:latest
