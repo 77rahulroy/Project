@@ -16,10 +16,6 @@ phases:
     commands:
       - docker build -t $REPOSITORY_NAME .
       - docker tag $REPOSITORY_NAME:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPOSITORY_NAME:latest
-
-  # post_build:
-  #   commands:
-  #     - docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPOSITORY_NAME:latest
     
   post_build:
   commands:
